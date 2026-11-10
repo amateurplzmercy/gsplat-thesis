@@ -1,0 +1,76 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>3DGS 场景缓存回放</title>
+  <link rel="stylesheet" href="replay.css">
+</head>
+<body>
+  <header class="masthead">
+    <div>
+      <p class="eyebrow">3D GAUSSIAN SPLATTING · PLAYROOM</p>
+      <h1>场景缓存回放</h1>
+      <p class="subhead">在同一相机轨迹上查看图像、场景块传输和实测帧时间。</p>
+    </div>
+    <div class="route-control">
+      <label for="track">回放轨迹</label>
+      <select id="track">
+        <option value="continuous">连续 · 326 MiB</option>
+        <option value="capture_order">原始拍摄顺序 · 375 MiB</option>
+      </select>
+    </div>
+  </header>
+  <main>
+    <div class="replay-grid">
+      <section class="panel scene" aria-label="3DGS 回放画面">
+        <div class="scene-view">
+          <img id="scene-image" width="640" height="360" alt="当前相机的 Playroom 渲染画面">
+          <span id="frame-label" class="frame-label"></span>
+        </div>
+        <div class="controls">
+          <button id="play" type="button" aria-label="播放或暂停回放">播放</button>
+          <input type="range" id="scrub" min="0" value="0" aria-label="回放帧编号">
+          <span id="camera-label"></span>
+        </div>
+      </section>
+      <section class="panel stats" aria-label="策略和实测数据">
+        <p class="eyebrow">策略</p>
+        <div id="policies" role="group" aria-label="选择策略">
+          <button type="button" data-policy="lru">LRU</button>
+          <button type="button" data-policy="fixed">固定预取</button>
+          <button type="button" data-policy="short_only">短预测</button>
+        </div>
+        <h2>当前帧</h2>
+        <dl class="numbers">
+          <div><dt>帧时间中位数</dt><dd id="wall"></dd></div>
+          <div><dt>需求上传</dt><dd id="demand"></dd></div>
+          <div><dt>预取上传</dt><dd id="prefetch"></dd></div>
+          <div><dt>缓存常驻</dt><dd id="resident"></dd></div>
+        </dl>
+        <div class="meter" aria-hidden="true"><div id="resident-bar"></div></div>
+        <h2>热态汇总</h2>
+        <dl class="numbers">
+          <div><dt>组 p99</dt><dd id="p99"></dd></div>
+          <div><dt>每遍总 H→D</dt><dd id="transfer"></dd></div>
+          <div><dt>每遍无效预取</dt><dd id="wasted"></dd></div>
+          <div><dt>超过 33.3 ms</dt><dd id="slow"></dd></div>
+        </dl>
+      </section>
+    </div>
+    <section class="panel timeline">
+      <div class="timeline-header">
+        <div>
+          <h2>逐帧时间</h2>
+          <p>热态 16 遍同帧中位数 · 点击曲线区域定位 · 虚线为 33.3 ms</p>
+        </div>
+        <div id="jumps" aria-label="跳转到代表性帧"></div>
+      </div>
+      <canvas id="plot" aria-label="三种策略的逐帧时间曲线"></canvas>
+    </section>
+    <p class="notes">画面为同轨迹 LRU 的真实 3DGS 参考图像，展示尺寸为 640×360。曲线和汇总来自独立计时实验，热态统计排除首帧。演示按等速播放。</p>
+  </main>
+  <script src="replay-data.js"></script>
+  <script src="replay.js"></script>
+</body>
+</html>

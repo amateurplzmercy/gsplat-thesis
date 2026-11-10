@@ -1,0 +1,47 @@
+{
+  "python_archive": {
+    "filename": "python-3.10.11-embed-amd64.zip",
+    "sha256": "608619f8619075629c9c69f361352a0da6ed7e62f83a0e19c63e0ea32eb7629d"
+  },
+  "cuda_wheels": [
+    {
+      "filename": "torch-2.4.1+cu124-cp310-cp310-win_amd64.whl",
+      "url": "https://download-r2.pytorch.org/whl/cu124/torch-2.4.1%2Bcu124-cp310-cp310-win_amd64.whl",
+      "sha256": "db873d7c9f4b959ea818780736ad55c3b120d0337b12ef84a0ad5e9a6fc6b147"
+    },
+    {
+      "filename": "gsplat-1.5.3+pt24cu124-cp310-cp310-win_amd64.whl",
+      "url": "https://github.com/nerfstudio-project/gsplat/releases/download/v1.5.3/gsplat-1.5.3%2Bpt24cu124-cp310-cp310-win_amd64.whl",
+      "sha256": "62fae62e2cf233233527ba890fd322825476118edd4bd27a4e6cb36b1723003e"
+    }
+  ],
+  "model_archive": "https://repo-sam.inria.fr/fungraph/3d-gaussian-splatting/datasets/pretrained/models.zip",
+  "scenes": {
+    "train": {
+      "max_mib": 512,
+      "files": {
+        "cameras.json": {
+          "archive_member": "train/cameras.json",
+          "sha256": "f54e605c11aa577e3cd83702ce69385577da07eb9ae150f0f195116018506563"
+        },
+        "point_cloud.ply": {
+          "archive_member": "train/point_cloud/iteration_30000/point_cloud.ply",
+          "sha256": "70e055d46f53636c83547a59c4998a0a27f64e42fceba45c6b78dfc77f52958d"
+        }
+      }
+    },
+    "playroom": {
+      "max_mib": 650,
+      "files": {
+        "cameras.json": {
+          "archive_member": "playroom/cameras.json",
+          "sha256": "948d67f7ff0ebaa1ac2942daf58fa798a956b42dce10bb37cfc6c128991c5957"
+        },
+        "point_cloud.ply": {
+          "archive_member": "playroom/point_cloud/iteration_30000/point_cloud.ply",
+          "sha256": "3627c41163a903782ff710b955ba6f1e0cab236b1ffacf5c5f912775df6624da"
+        }
+      }
+    }
+  }
+}

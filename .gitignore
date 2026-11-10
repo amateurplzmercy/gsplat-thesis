@@ -1,0 +1,9 @@
+.venv/
+/tools/
+/downloads/
+/data/
+/demo/media/
+/demo/replay-data.js
+/reports/
+__pycache__/
+*.pyc
